@@ -15,15 +15,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Run Action
-        id: parse
-        uses: peter-murray/issue-forms-body-parser@v2.0.0
+      - name: Run GitHub issue forms parser
+        id: issue-parser
+        uses: edumserrano/github-issue-forms-parser@v1
         with:
-          issue_id: ${{ github.event.issue.number }}
-          separator: '###'
-          label_marker_start: '>>'
-          label_marker_end: '>>'
-
-      - name: Show parsed data
+          template-filepath: '.github/ISSUE_TEMPLATE/new-tip.yml'
+          issue-form-body: '${{ github.event.issue.body }}'
+      # The next step is using powershell to parse the action's output but you can use whatever you prefer.
+      # Note that in order to read the step outputs the action step must have an id.
+      - name: Output parsed issue
+        shell: pwsh
         run: |
-          echo "${{ steps.parse.outputs.payload }}"
+          $issue = '${{ steps.issue-parser.outputs.parsed-issue }}' | ConvertFrom-Json
+          $issueAsJsonIndented = ConvertTo-Json $issue
+          Write-Output $issueAsJsonIndented # outputs the parsed issue as an indented JSON string
+          $title = $issue.title
+          $description = $issue.description
+          $image = $issue.image
+          Write-Output "The title is $title"
+          Write-Output "The description is $description"
+          Write-Output "The image is $image"
