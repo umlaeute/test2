@@ -12,7 +12,7 @@ body:
   - type: input
     id: filename
     attributes:
-      label: >>Tip ID<<
+      label: Tip ID
       description: Suggested filename for the new tip (without path and extension)
       placeholder: new-tip
     validations:
@@ -20,7 +20,7 @@ body:
   - type: input
     id: title
     attributes:
-      label: >>Title<<
+      label: Title
       description: Short description of the tip 
       placeholder: Join the community by adding more Tips-of-the-Day
     validations:
@@ -28,7 +28,7 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: >>Detail<<
+      label: Detail
       description: Longer description of the tip. (plain text)
       placeholder: |
         Everybody is invited to add one or more Tips-of-the-Day.
@@ -39,7 +39,7 @@ body:
   - type: textarea
     id: image
     attributes:
-      label: >>Image<<
+      label: Image
       description: Optionally upload an image
       placeholder: |
         You can use this field to upload an (animated) GIF.
