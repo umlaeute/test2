@@ -25,9 +25,10 @@ jobs:
         with:
           template-filepath: '.github/ISSUE_TEMPLATE/new-tip.yml'
           issue-form-body: '${{ github.event.issue.body }}'
-      # The next step is using powershell to parse the action's output but you can use whatever you prefer.
-      # Note that in order to read the step outputs the action step must have an id.
-      - name: Output parsed issue
+      - name: Output parsed issue (python)
+        run: |
+          ./parsejson.py "${{ steps.issue-parser.outputs.parsed-issue }}" || true
+      - name: Output parsed issue (JQ/bash)
         run: |
           filename=$(echo "${{ steps.issue-parser.outputs.parsed-issue }}" | jq -r ".filename")
           echo "FILE: $filename"
