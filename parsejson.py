@@ -4,6 +4,7 @@ import json
 from pprint import pprint
 import sys
 import requests
+import re
 
 
 def getdata(s):
@@ -13,13 +14,13 @@ def getdata(s):
       data["filename"] = "foobar"
     
     if "description" in data:
-      data["description"] = data["description"].lstrip("```plain text").rstrip("```").strip()
+      data["description"] = data["description"].lstrip("```plain text").rstrip("```").replace("\\n", "\n").strip()
     
     if "image" in data:
       img = re.findall("!\[.*\]\(([^)]*)\)", data["image"])[0]
-      if img.lower.endswith(".gif"):
+      if img.lower().endswith(".gif"):
         data["image"] = img
-      else
+      else:
         del data["image"]
 
     return data
@@ -27,13 +28,14 @@ def getdata(s):
 def makefile(filename, title="", description="", url="", **kwargs):
    data=[]
    if title:
-      data.append("TITLE\t%s\n" % title)
+      data.append("TITLE\t%s" % title)
    if description:
-      data += [["DETAILS\t%s\n" % _ for _ in description.splitlines()]]
+      data += ["DETAILS\t%s" % _ for _ in description.splitlines()]
    if url:
-      data.append("URL\t%s\n" % url)
+      data.append("URL\t%s" % url)
    with open("%s.txt" % filename, "w") as f:
-      f.writelines(data)
+      f.write("\n".join(data))
+      f.write("\n")
       
 def makeimage(filename, image="", **kwargs):
    if not image:
