@@ -1,7 +1,7 @@
 name: Tip of the Day
 description: Request a new Tip-of-the-Day
 title: "[Tip]: "
-#labels: ["bug", "triage"]
+labels: ["autotip"]
 assignees:
   - umlaeute
 body:
