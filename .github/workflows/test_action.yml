@@ -28,3 +28,5 @@ jobs:
       - name: Output parsed issue
         run: |
           ./parsejson.py '${{ steps.issue-parser.outputs.parsed-issue }}' || true
+	  ls -lha
+          find . -maxdepth 1 -type f -exec md5sum {} +
