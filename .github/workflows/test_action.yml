@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+      - name: Install Dependencies
+        run: |
+           apt-get update && apt-get -y --no-install-recommends jq
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -25,4 +29,11 @@ jobs:
       # Note that in order to read the step outputs the action step must have an id.
       - name: Output parsed issue
         run: |
-          echo ${{ steps.issue-parser.outputs.parsed-issue }}
+          filename=$(echo "${{ steps.issue-parser.outputs.parsed-issue }}" | jq -r ".filename")
+          echo "FILE: $filename"
+          title=$(echo "${{ steps.issue-parser.outputs.parsed-issue }}" | jq -r ".title")
+          echo "TITLE: $title"
+          description=$(echo "${{ steps.issue-parser.outputs.parsed-issue }}" | jq -r ".description" | sed -e '1d' -e '$d')
+          echo "DESCRIPTION: $description"
+          image=$(echo "${{ steps.issue-parser.outputs.parsed-issue }}" | jq -r ".image" | sed -e 's|.*](||' -e 's|).*||')
+          echo "IMAGE: $image"
