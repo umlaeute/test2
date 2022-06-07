@@ -25,9 +25,15 @@ jobs:
         with:
           template-filepath: '.github/ISSUE_TEMPLATE/new-tip.yml'
           issue-form-body: '${{ github.event.issue.body }}'
-      - name: Output parsed issue (python)
+      - name: Output parsed issue (bash)
         run: |
-          ./parsejson.py "${{ steps.issue-parser.outputs.parsed-issue }}" || true
+          echo ${{ steps.issue-parser.outputs.parsed-issue.title }}
+      - name: Output parsed issue (python/1)
+        run: |
+          ./parsejson.py '${{ steps.issue-parser.outputs.parsed-issue }}' || true
+      - name: Output parsed issue (python/2)
+        run: |
+          ./parsejson.py ${{ steps.issue-parser.outputs.parsed-issue }} || true
       - name: Output parsed issue (JQ/bash)
         run: |
           filename=$(echo "${{ steps.issue-parser.outputs.parsed-issue }}" | jq -r ".filename")
