@@ -31,7 +31,6 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.PAT }}
           commit-message: 'New Tip: ${{ github.event.issue.title }}'
           add-paths: /tips/*.*
           signoff: false
