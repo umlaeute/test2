@@ -13,8 +13,8 @@ def getdata(s):
     if "filename" not in data:
       data["filename"] = "foobar"
     
-    if "description" in data:
-      data["description"] = data["description"].lstrip("```plain text").rstrip("```").replace("\\n", "\n").strip()
+    if "details" in data:
+      data["details"] = data["details"].lstrip("```plain text").rstrip("```").replace("\\n", "\n").strip()
     
     if "image" in data:
       img = re.findall("!\[.*\]\(([^)]*)\)", data["image"])[0]
@@ -25,12 +25,12 @@ def getdata(s):
 
     return data
 
-def makefile(filename, title="", description="", url="", **kwargs):
+def makefile(filename, title="", details="", url="", **kwargs):
    data=[]
    if title:
       data.append("TITLE\t%s" % title)
-   if description:
-      data += ["DETAILS\t%s" % _ for _ in description.splitlines()]
+   if details:
+      data += ["DETAILS\t%s" % _ for _ in details.splitlines()]
    if url:
       data.append("URL\t%s" % url)
    with open("%s.txt" % filename, "w") as f:
