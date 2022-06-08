@@ -23,6 +23,7 @@ jobs:
           issue-form-body: '${{ github.event.issue.body }}'
       - name: Output parsed issue
         run: |
-          ./parsejson.py '${{ steps.issue-parser.outputs.parsed-issue }}' || true
-          ls -lha
-          find . -maxdepth 1 -type f -exec md5sum {} +
+          mkdir -p tips
+          ./parsejson.py --outdir tips --filename 'tip-${{ github.event.issue.number }}' --author '${{ github.actor }}' '${{ steps.issue-parser.outputs.parsed-issue }}'
+          ls -lha tips
+          find tips -type f -exec grep . {} +
