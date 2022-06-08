@@ -32,7 +32,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: 'New Tip: ${{ github.event.issue.title }}'
-          add-paths: /tips/*.*
+          add-paths: tips/*.*
           signoff: false
           branch: newtip
           branch-suffix: timestamp
