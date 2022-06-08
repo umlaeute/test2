@@ -1,0 +1,2 @@
+TITLE	Did you know?
+DETAIL	There is no such thing as a Fnorkel.
