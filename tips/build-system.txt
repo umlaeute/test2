@@ -1,0 +1,6 @@
+TITLE	use npm to build your project
+DETAILS	just run npm to build your project
+DETAILS	
+DETAILS	cool, aye?
+URL	https://github.com
+AUTHOR	umlaeute
