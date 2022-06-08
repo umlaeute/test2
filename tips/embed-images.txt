@@ -1,0 +1,3 @@
+TITLE	you can embed images in your tip-of-the-day
+DETAILS	just upload GIF image in the issue-template
+AUTHOR	umlaeute
