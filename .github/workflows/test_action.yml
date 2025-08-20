@@ -18,5 +18,4 @@ jobs:
     steps:
       - name: test
         run: |
-          echo "float ${{ matrix.float }}"
-          echo "msystem  ${{ matrix.msystem }}"
+          echo test
