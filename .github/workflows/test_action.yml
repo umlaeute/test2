@@ -11,10 +11,7 @@ jobs:
       fail-fast: false
       matrix:
         float: [32, 64]
-        include: [
-          { msystem: ucrt},
-          { msystem: mingw64}
-        ]
+        msystem: [ucrt, mingw64]
     steps:
       - name: test
         run: |
