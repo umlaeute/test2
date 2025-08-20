@@ -1,5 +1,8 @@
 name: Test Action
 
+on:
+  push:
+
 jobs:
   test:
     name: Test Action
