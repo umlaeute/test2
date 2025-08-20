@@ -13,6 +13,13 @@ jobs:
       matrix:
         float: [32, 64]
         msystem: [ucrt, mingw64]
+        include: [
+          {msystem: ucrt64, runner: windows-latest},
+          {msystem: clang64, runner: windows-latest},
+          {msystem: mingw64, runner: windows-latest},
+          {msystem: mingw32, runner: windows-latest},
+          {msystem: clangarm64, runner: windows-11-arm}
+        ]
     steps:
       - name: test
         run: |
