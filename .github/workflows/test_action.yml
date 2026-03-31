@@ -9,5 +9,13 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+      - name: First steps
+        run: |
+          echo "1..."
+          echo "2..."
+          echo "3..."
       - name: Print secret
         run:  echo "${{ secrets.MY_SECRET }}"
+      - name: Cleanup
+        run:  echo Goodbye
+
